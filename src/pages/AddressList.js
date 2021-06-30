@@ -1,4 +1,4 @@
-import MessageModal from './MessageModal';
+import MessageModal from '../components/MessageModal';
 import { useState } from 'react';
 
 function AddressList(props) {
@@ -54,18 +54,10 @@ function AddressList(props) {
                                             <td>Email</td>
                                             <td>{address.email}</td>
                                         </tr>
-                                        <tr>
-                                            <td>Phone</td>
-                                            <td>{address.phone}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Address</td>
-                                            <td>{address.address}</td>
-                                        </tr>
                                     </tbody>
                                 </table>
                                 <div className="text-center">
-                                    <button className="btn btn-primary" onClick={() => toggleModal(address.id)}>Show Detail</button>
+                                    <button className="btn btn-primary" onClick={() => toggleModal(address.id)}>View Profile</button>
                                 </div>
                             </div>
                         </div>

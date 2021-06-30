@@ -3,7 +3,7 @@ import AddressList from './components/AddressList';
 
 function App() {
   return (
-    <AddressList />
+    <AddressList title="My All Contacts List" />
   );
 }
 

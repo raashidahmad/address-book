@@ -1,5 +1,5 @@
-function NewAddress() {
-    return (<div></div>);
-}
-
-export default NewAddress;
+function NewAddressPage() {
+    return <div>New Address Page</div>;
+  }
+  
+  export default NewAddressPage;

@@ -2,7 +2,6 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 function MessageModal(props) {
-    console.log(props);
     if (!props.show) {
         return null;
     } else {

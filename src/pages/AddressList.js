@@ -25,7 +25,7 @@ function AddressList(props) {
     function toggleModal(id = 0) {
         var newValue = !show;
         if (newValue) {
-            var result = addressList.filter(a => a.id == id);
+            var result = addressList.filter(a => a.id === id);
             if (result.length > 0) {
                 setProfile(() => ({
                     name: result[0].name,
@@ -40,7 +40,7 @@ function AddressList(props) {
 
     return (
         <div>
-            <h1>{props.title}</h1>
+            <h4 className="text-center">{props.title}</h4>
             {
                 addressList.map((address) => (
                     <div key={address.id} className="card">

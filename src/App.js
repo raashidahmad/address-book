@@ -1,17 +1,24 @@
-import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import { Route, Switch } from 'react-router-dom';
+import MainNavigation from './components/MainNavigation';
 import AddressList from './pages/AddressList';
+import NewAddressPage from './pages/NewAddress';
 
 function App() {
   return (
-    <Switch>
-      <Route Path="/">
-        <AddressList title="My All Contacts List" />
-      </Route>
-      <Route Path="/new-address">
-
-      </Route>
-    </Switch>
+    <div>
+      <MainNavigation />
+      <div className="container margin-top-20">
+        <Switch>
+          <Route path='/' exact>
+            <AddressList title="My Address List" />
+          </Route>
+          <Route path='/new-address'>
+            <NewAddressPage />
+          </Route>
+        </Switch>
+      </div>
+    </div>
   );
 }
 export default App;

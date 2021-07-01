@@ -1,7 +1,7 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import AddressList from './pages/AddressList';
-import NewAddressPage from './pages/NewAddress';
+import ContactList from './pages/ContactList';
+import NewContactPage from './pages/NewContact';
 import Layout from './components/layout/Layout';
 
 function App() {
@@ -10,10 +10,10 @@ function App() {
       <div className="container margin-top-20">
         <Switch>
           <Route path='/' exact>
-            <AddressList title="My Address List" />
+            <ContactList title="My Address List" />
           </Route>
           <Route path='/new-address'>
-            <NewAddressPage />
+            <NewContactPage />
           </Route>
         </Switch>
       </div>

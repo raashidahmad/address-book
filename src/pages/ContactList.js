@@ -1,7 +1,7 @@
 import MessageModal from '../components/modals/MessageModal';
 import { useState } from 'react';
 
-function AddressList(props) {
+function ContactList(props) {
 
     const [show, setShow] = useState();
     const [profile, setProfile] = useState({ name: '', address: '', phone: '', email: '' });
@@ -68,4 +68,4 @@ function AddressList(props) {
         </div>
     );
 }
-export default AddressList;
+export default ContactList;

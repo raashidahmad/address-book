@@ -1,13 +1,12 @@
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
-import MainNavigation from './components/MainNavigation';
 import AddressList from './pages/AddressList';
 import NewAddressPage from './pages/NewAddress';
+import Layout from './components/layout/Layout';
 
 function App() {
   return (
-    <div>
-      <MainNavigation />
+    <Layout>
       <div className="container margin-top-20">
         <Switch>
           <Route path='/' exact>
@@ -18,7 +17,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-    </div>
+    </Layout>
   );
 }
 export default App;

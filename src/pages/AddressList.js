@@ -1,4 +1,4 @@
-import MessageModal from '../components/MessageModal';
+import MessageModal from '../components/modals/MessageModal';
 import { useState } from 'react';
 
 function AddressList(props) {

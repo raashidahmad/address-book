@@ -1,63 +1,95 @@
 import MessageModal from '../components/modals/MessageModal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Settings from '../config/settings';
 
 function ContactList(props) {
-
     const [show, setShow] = useState();
-    const [profile, setProfile] = useState({ name: '', address: '', phone: '', email: '' });
-    let addressList = [
+    const [profile, setProfile] = useState({ name: '', contact: '', phone: '', email: '' });
+    const [error, setError] = useState(null);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [contacts, setContacts] = useState([]);
+    const url = Settings.serverUrl;
+
+    /*let contactList = [
         {
             id: 1,
             email: 'one@none.com',
             phone: '03007654321',
             name: 'Rashid Ahmad',
-            address: 'Dummy address one, street #1, block A'
+            contact: 'Dummy contact one, street #1, block A'
         },
         {
             id: 2,
             email: 'two@none.com',
             phone: '03007754322',
             name: 'Muhammad Amjad',
-            address: 'Dummy address two, street #2, block B'
+            contact: 'Dummy contact two, street #2, block B'
         }
-    ];
+    ];*/
 
-    function toggleModal(id = 0) {
+    useEffect(() => {
+        fetch(url)
+        .then(res => res.json())
+        .then(
+            (result) => {
+                setIsLoaded(true);
+                setContacts(result);
+            },
+            (error) => {
+                setIsLoaded(true);
+                setError(error);
+            }
+        );
+    }, []);
+    
+
+    function toggleModal(id = '') {
         var newValue = !show;
         if (newValue) {
-            var result = addressList.filter(a => a.id === id);
+            var result = contacts.filter(a => a._id === id);
             if (result.length > 0) {
                 setProfile(() => ({
                     name: result[0].name,
                     email: result[0].email,
-                    address: result[0].address,
-                    phone: result[0].phone
+                    phone: result[0].phone,
+                    address: result[0].address
                 }));
             }
         }
         setShow(!show);
     }
 
-    return (
+    if (error) {
+        return (
+            <div className="col-md-12">
+                <span className="text-error">An error occured while fetching the data: {error}</span>
+            </div>);
+    } else if (!isLoaded) {
+        return (
+            <div className="col-md-12">
+                <span className="text-info">Wait loading data...</span>
+            </div>);
+    } else 
+      return (
         <div>
             <h4 className="text-center">{props.title}</h4>
             {
-                addressList.map((address) => (
-                    <div key={address.id} className="card">
+                contacts.map((contact) => (
+                    <div key={contact._id} className="card">
                         <div className="card-body">
-                            <h4 className="card-title">{address.name}</h4>
+                            <h4 className="card-title">{contact.name}</h4>
                             <div className="card-text">
                                 <table className="table table-striped">
                                     <thead></thead>
                                     <tbody>
                                         <tr>
                                             <td>Email</td>
-                                            <td>{address.email}</td>
+                                            <td>{contact.email}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div className="text-center">
-                                    <button className="btn btn-primary" onClick={() => toggleModal(address.id)}>View Profile</button>
+                                    <button className="btn btn-primary" onClick={() => toggleModal(contact._id)}>View Profile</button>
                                 </div>
                             </div>
                         </div>

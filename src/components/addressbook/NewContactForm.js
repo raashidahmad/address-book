@@ -1,18 +1,26 @@
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import { useState, useRef } from 'react';
+import Settings from "../../config/settings";
+import { useHistory } from 'react-router-dom';
 
 function NewContactForm() {
+    const history = useHistory();
     const [validated, setValidated] = useState(false);
+    const [isPosting, setPosted] = useState(false);
+    const [btnText, setText] = useState('Save Contact');
     const nameInputRef = useRef();
     const emailInputRef = useRef();
     const phoneInputRef = useRef();
     const addressInputRef = useRef();
+    const httpOptions = Settings.httpOptions;
+    const url = Settings.serverUrl;
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
             event.stopPropagation();
+            return false;
         }
         const name = nameInputRef.current.value;
         const email = emailInputRef.current.value;
@@ -26,8 +34,20 @@ function NewContactForm() {
             address: address,
         };
 
-        console.log(contactData);
-        //setValidated(true);
+        setPosted(true);
+        setText('Saving....');
+        httpOptions.body = JSON.stringify(contactData);
+        fetch(url, httpOptions)
+            .then(response => response.json())
+            .then((response) => {
+                history.push('/');
+            })
+            .catch(error => {
+                //this.setState({ errorMessage: error.toString() });
+                setPosted(false);
+                setText('Save Contact');
+                console.error('There was an error!', error);
+            });;
     };
 
     return (
@@ -86,7 +106,7 @@ function NewContactForm() {
                         </Form.Group>
                     </Form.Row>
                     <div className="text-right">
-                        <Button type="submit">Save Contact</Button>
+                        <Button disabled={isPosting} type="submit">{btnText}</Button>
                     </div>
                 </Form>
             </div>

@@ -10,23 +10,6 @@ function ContactList(props) {
     const [contacts, setContacts] = useState([]);
     const url = Settings.serverUrl;
 
-    /*let contactList = [
-        {
-            id: 1,
-            email: 'one@none.com',
-            phone: '03007654321',
-            name: 'Rashid Ahmad',
-            contact: 'Dummy contact one, street #1, block A'
-        },
-        {
-            id: 2,
-            email: 'two@none.com',
-            phone: '03007754322',
-            name: 'Muhammad Amjad',
-            contact: 'Dummy contact two, street #2, block B'
-        }
-    ];*/
-
     useEffect(() => {
         fetch(url)
         .then(res => res.json())

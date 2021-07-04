@@ -3,7 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Project Background
-This project is created as a part of learning and the intention was to design a simple address book. The project uses the restful APIs created using NodeJs. You can access the github code for server using this URL [https://github.com/raashidahmad/addressbook-apis](https://github.com/raashidahmad/addressbook-apis). You can set the server URL for the APIs under the config/settings.js file. 
+This project is created as a part of the learning and the intention was to design a simple address book. The project uses the restful APIs created using NodeJs. You can access the github code for the server using this URL [https://github.com/raashidahmad/addressbook-apis](https://github.com/raashidahmad/addressbook-apis). You can set the URL for the server APIs under the config/settings.js file. Please note the server is configured to listen on [http://localhost:4000](http://localhost:4000) by default.
 
 ## Available Scripts
 

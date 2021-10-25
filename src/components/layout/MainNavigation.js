@@ -1,8 +1,14 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {Link} from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 function MainNavigation() {
+    const history = useHistory();
+    const logout = function() {
+        localStorage.clear();
+        history.push('/login');
+    }
     return (
         <Navbar bg="primary" variant="light" expand="lg">
             <Navbar.Brand><Link to="/">My Address Book</Link></Navbar.Brand>
@@ -13,6 +19,13 @@ function MainNavigation() {
                     <Link to="/new-address">New Address</Link>
                 </Nav>
             </Navbar.Collapse>
+
+            <span className="float-right">
+                <Navbar.Collapse>
+                    <button className="btn btn-default btn-sm" onClick={logout}>Logout</button>
+                </Navbar.Collapse>
+            </span>
+            
         </Navbar>
     );
 }

@@ -4,11 +4,11 @@ import ContactList from './pages/ContactList';
 import NewContactPage from './pages/NewContact';
 import LoginPage from './pages/Login';
 import Layout from './components/layout/Layout';
-import { useState } from 'react';
+import ProfilePage from './pages/Profile';
+import ProtectedRoute from './components/protectedroute/protectedroute';
 
 function App() {
-  const [isAuthorize, setAuthorized] = useState();
-
+  
   return (
     <Layout>
       <div className="container margin-top-20">
@@ -22,6 +22,7 @@ function App() {
           <Route path='/new-address'>
             <NewContactPage />
           </Route>
+          <ProtectedRoute path="/profile" component={ProfilePage} />
         </Switch>
       </div>
     </Layout>

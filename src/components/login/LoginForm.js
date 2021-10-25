@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useState } from 'react';
-import { Form, InputGroup, Button, Col } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 import { useHistory } from 'react-router';
 import Settings from '../../config/settings';
 
@@ -41,9 +41,9 @@ function LoginForm() {
             .then(response => response.json())
             .then((response) => {
                 if (response && response.token) {
-                    console.log('Token: ' + response.token);
+                    localStorage.setItem('token', response.token);
+                    history.push('/profile');
                 }
-                //history.push('/profile');
             })
             .catch(error => {
                 setProcessing(false);

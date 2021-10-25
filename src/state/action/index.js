@@ -1,18 +1,23 @@
-const userLoggedIn = (userId) => {
-    return (dispatch) => {
-        dispatch({
-            type: 'loggedIn',
-            payload: userId
-        });
-    };
-}
 
-const userLoggedOut = (userId) => {
-    return (dispatch) => {
-        dispatch({
-            type: 'loggedOut',
-            payload: userId
-        });
+const userDefaultState = {
+    loggedIn: false,
+    user: {}
+};
+
+const userStateReducer = (action) => {
+    switch(action.type){
+        case "SET_USER":
+            return {
+                loggedIn: true,
+                user: {...action.payload}
+            }
+        case "LOG_OUT":
+            localStorage.clear()
+            return {
+                loggedIn: false,
+                user: {}
+            }
+        default: return state
     }
-}
-module.exports = { userLoggedIn, userLoggedOut };
+};
+module.exports = { userStateReducer };

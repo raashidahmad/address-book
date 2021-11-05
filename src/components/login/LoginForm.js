@@ -1,11 +1,12 @@
 import { useRef } from 'react';
 import { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import Settings from '../../config/settings';
+import { SetUserContext } from '../../contexts/usercontext';
 
 function LoginForm() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [validated, setValidated] = useState();
     const [isProcessing, setProcessing] = useState();
     const [isError, setError] = useState(false);
@@ -42,7 +43,7 @@ function LoginForm() {
             .then((response) => {
                 if (response && response.token) {
                     localStorage.setItem('token', response.token);
-                    history.push('/profile');
+                    navigate('/profile');
                 }
             })
             .catch(error => {

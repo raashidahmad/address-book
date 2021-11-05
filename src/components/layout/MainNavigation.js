@@ -1,13 +1,13 @@
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import {Link} from 'react-router-dom';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 function MainNavigation() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const logout = function() {
         localStorage.clear();
-        history.push('/login');
+        navigate('/login');
     }
     return (
         <Navbar bg="primary" variant="light" expand="lg">

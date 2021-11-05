@@ -1,10 +1,10 @@
 import { Form, Col, InputGroup, Button } from "react-bootstrap";
 import { useState, useRef } from 'react';
 import Settings from "../../config/settings";
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function NewContactForm() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [validated, setValidated] = useState(false);
     const [isPosting, setPosted] = useState(false);
     const [btnText, setText] = useState('Save Contact');
@@ -40,7 +40,7 @@ function NewContactForm() {
         fetch(url, httpOptions)
             .then(response => response.json())
             .then((response) => {
-                history.push('/');
+                navigate('/');
             })
             .catch(error => {
                 //this.setState({ errorMessage: error.toString() });

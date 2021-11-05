@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import ContactList from './pages/ContactList';
 import NewContactPage from './pages/NewContact';
 import LoginPage from './pages/Login';
@@ -12,18 +12,12 @@ function App() {
   return (
     <Layout>
       <div className="container margin-top-20">
-        <Switch>
-        <Route path='/login' exact>
-            <LoginPage />
-          </Route>
-          <Route path='/' exact>
-            <ContactList title="My Address List" />
-          </Route>
-          <Route path='/new-address'>
-            <NewContactPage />
-          </Route>
+        <Routes>
+        <Route path='/login' element={<LoginPage />} />
+          <Route path='/' element={<ContactList title="My Address List" />} />
+          <Route path='/new-address' element={<NewContactPage />} />
           <ProtectedRoute path="/profile" component={ProfilePage} />
-        </Switch>
+        </Routes>
       </div>
     </Layout>
   );

@@ -3,14 +3,19 @@ import { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import Settings from '../../config/settings';
-import { SetUserContext } from '../../contexts/usercontext';
+import { login } from '../../contexts/actions';
+import { useAuthState } from '../../contexts/contexts';
+import { useAuthDispatch } from '../../contexts/contexts';
 
 function LoginForm() {
+
     const navigate = useNavigate();
     const [validated, setValidated] = useState();
     const [isProcessing, setProcessing] = useState();
     const [isError, setError] = useState(false);
     const [btnText, setBtnText] = useState('Login');
+    const { loading, errorMessage } = useAuthState();
+    const dispatch = useAuthDispatch();
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
@@ -18,7 +23,7 @@ function LoginForm() {
     const httpOptions = Settings.httpOptions;
     const serverUrl = Settings.tokenUrl;
 
-    const checkLogin = (event) => {
+    const checkLogin = async (event) => {
         event.preventDefault();
         const form = event.currentTarget;
         setError(false);
@@ -38,7 +43,16 @@ function LoginForm() {
         setBtnText('Checking login...');
         httpOptions.body = JSON.stringify(requestBody);
 
-        fetch(serverUrl, httpOptions)
+        try {
+            let response = await login(dispatch, requestBody);
+            if (!response) {
+                return;
+            }
+            navigate('/profile');
+        } catch(error) {
+            console.log(error);
+        }
+        /*fetch(serverUrl, httpOptions)
             .then(response => response.json())
             .then((response) => {
                 if (response && response.token) {
@@ -54,7 +68,7 @@ function LoginForm() {
                 setProcessing(false);
                 setError(true);
                 setBtnText('Login');
-            }); 
+            });*/ 
     }
 
     return (
@@ -70,6 +84,7 @@ function LoginForm() {
                     <strong>Error!</strong> Username or password provided is incorrect
                   </div> : null
                 }
+                {errorMessage ? <p className="alert-danger">{errorMessage}</p> : null}
                 <Form.Row>
                     <Form.Group as={Col} md="6" controlId="validationEmail">
                         <Form.Label>Email: </Form.Label>

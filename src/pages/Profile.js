@@ -1,16 +1,11 @@
-import { useEffect, useState } from 'react';
+//import { useAuthDispatch, useAuthState } from '../contexts/contexts';
 
 function ProfilePage() {
-    const [userInfo, setUserInfo] = useState();
-    console.log('Profile page rendered');
-    useEffect(() => {
-        var token = localStorage.getItem('token');
-        if (token) {
-            setUserInfo(token);
-        }
-    }, []);
+    //const dispatch = useAuthDispatch();
+    //const userData = useAuthState();
+
     return(
-        <div>This is your profile page. The user token is: {userInfo}</div>
+        <div>This is your profile page. The user token is: {}</div>
     )
 }
 

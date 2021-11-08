@@ -1,13 +1,15 @@
 import React, { useReducer, useState } from 'react';
 
-let token = localStorage.getItem('token') ? JSON.parse(localStorage.getItem('token')) : '';
+let token = localStorage.getItem('token') ? localStorage.getItem('token') : '';
 
 export const initialState = {
-    token: '' || token
+    token: '' || token,
+    loading: false,
+    errorMessage: null
 }
 
-function AuthReducer(initialState, action) {
-    switch(action) {
+export function AuthReducer(initialState, action) {
+    switch(action.type) {
         case 'REQUEST_LOGIN':
             return {
                 ...initialState,
@@ -44,5 +46,3 @@ function AuthReducer(initialState, action) {
             break;
     }
 }
-
-export default AuthReducer;

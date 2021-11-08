@@ -6,20 +6,23 @@ import LoginPage from './pages/Login';
 import Layout from './components/layout/Layout';
 import ProfilePage from './pages/Profile';
 import ProtectedRoute from './components/protectedroute/protectedroute';
+import { AuthProvider } from './contexts/contexts';
 
 function App() {
-  
+
   return (
-    <Layout>
-      <div className="container margin-top-20">
-        <Routes>
-        <Route path='/login' element={<LoginPage />} />
-          <Route path='/' element={<ContactList title="My Address List" />} />
-          <Route path='/new-address' element={<NewContactPage />} />
-          <ProtectedRoute path="profile" component={ProfilePage} />
-        </Routes>
-      </div>
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <div className="container margin-top-20">
+          <Routes>
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/' element={<ContactList title="My Address List" />} />
+            <Route path='/new-address' element={<NewContactPage />} />
+            <ProtectedRoute path="profile" component={ProfilePage} />
+          </Routes>
+        </div>
+      </Layout>
+    </AuthProvider>
   );
 }
 export default App;

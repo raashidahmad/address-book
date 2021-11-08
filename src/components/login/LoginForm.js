@@ -21,7 +21,7 @@ function LoginForm() {
     const checkLogin = (event) => {
         event.preventDefault();
         const form = event.currentTarget;
-
+        setError(false);
         if (form.checkValidity() === false) {
             event.stopPropagation();
             return false;
@@ -44,6 +44,10 @@ function LoginForm() {
                 if (response && response.token) {
                     localStorage.setItem('token', response.token);
                     navigate('/profile');
+                } else {
+                    setProcessing(false);
+                    setError(true);
+                    setBtnText('Login');
                 }
             })
             .catch(error => {
@@ -59,6 +63,13 @@ function LoginForm() {
             <div className="card-header">Login Form</div>
             <div className="card-body">
             <Form noValidate validated={validated} onSubmit={checkLogin}>
+                {
+                    isError ? 
+                    <div className="alert alert-danger alert-dismissible">
+                    <a href="#" className="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> Username or password provided is incorrect
+                  </div> : null
+                }
                 <Form.Row>
                     <Form.Group as={Col} md="6" controlId="validationEmail">
                         <Form.Label>Email: </Form.Label>

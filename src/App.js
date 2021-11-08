@@ -16,7 +16,7 @@ function App() {
         <Route path='/login' element={<LoginPage />} />
           <Route path='/' element={<ContactList title="My Address List" />} />
           <Route path='/new-address' element={<NewContactPage />} />
-          <ProtectedRoute path="/profile" component={ProfilePage} />
+          <ProtectedRoute path="profile" component={ProfilePage} />
         </Routes>
       </div>
     </Layout>

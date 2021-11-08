@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 function ProfilePage() {
     const [userInfo, setUserInfo] = useState();
-
+    console.log('Profile page rendered');
     useEffect(() => {
         var token = localStorage.getItem('token');
         if (token) {

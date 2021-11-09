@@ -20,7 +20,7 @@ export function AuthReducer(initialState, action) {
         case 'LOGIN_SUCCESS':
             return {
                 ...initialState,
-                token: action.payload.authToken,
+                token: action.payload.token,
                 loading: false
             }
             break;

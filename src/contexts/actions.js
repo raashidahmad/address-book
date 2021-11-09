@@ -21,9 +21,9 @@ export async function login(dispatch, payload) {
 		let response = await fetch(serverUrl, httpOptions);
 		let data = await response.json();
 
-		if (data) {
-			dispatch({ type: 'LOGIN_SUCCESS', payload: data });
-			localStorage.setItem('token', JSON.stringify(data));
+		if (data && data.token) {
+			dispatch({ type: 'LOGIN_SUCCESS', payload: { token: data.token } });
+			localStorage.setItem('token', data.token);
 			return data;
 		}
 

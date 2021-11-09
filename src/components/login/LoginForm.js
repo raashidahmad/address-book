@@ -46,6 +46,9 @@ function LoginForm() {
         try {
             let response = await login(dispatch, requestBody);
             if (!response) {
+                setProcessing(false);
+                setError(true);
+                setBtnText('Login');
                 return;
             }
             navigate('/profile');
